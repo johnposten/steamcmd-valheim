@@ -21,6 +21,7 @@ RUN set -x \
 	&& rm -rf /var/lib/apt/lists/*
 
 ENV PORTRANGE=2456-2458
+ENV SERVER_NAME "Valheim Dedicated"
 
 USER ${USER}
 
