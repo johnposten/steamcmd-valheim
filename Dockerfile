@@ -14,12 +14,11 @@ ENV SERVER_NAME "Valheim Dedicated"
 ENV WORLD "something"
 ENV SERVER_PASSWORD "changeme"
 
-ARG CACHEBUST=1
 RUN set -x \
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends --no-install-suggests \
 		wget=1.20.1-1.1 \
-	&& wget "${DLURL}/dev/entrypoint.sh" -O "${HOMEDIR}/entrypoint.sh" \
+	&& wget "${DLURL}/main/entrypoint.sh" -O "${HOMEDIR}/entrypoint.sh" \
 	&& mkdir -p "${STEAMAPPDIR}" \
 	&& chmod 755 "${HOMEDIR}/entrypoint.sh" "${STEAMAPPDIR}" \
 	&& chown "${USER}:${USER}" "${HOMEDIR}/entrypoint.sh" "${STEAMAPPDIR}" \
