@@ -4,9 +4,11 @@ bash "${STEAMCMDDIR}/steamcmd.sh" +login anonymous \
 				+app_update "${STEAMAPPID}" \
 				+quit
 
-# Change rcon port on first launch, because the default config overwrites the commandline parameter (you can comment this out if it has done it's purpose)
-sed -i -e 's/name \"My server\"/'"name \"${SERVER_NAME}\""'/g' "${STEAMAPPDIR}/start_server.sh"
+cd "${STEAMAPPDIR}"
 
-echo "Change directory to ${STEAMAPPDIR} and Starting server..."
+# Change server name, password and world
+sed -i -e 's/name \"My server\"/'"name \"${SERVER_NAME}\""'/g' "start_server.sh" && sed -i -e 's/password \"secret\"/'"password \"${SERVER_PASSWORD}\""'/g' "start_server.sh" && sed -i -e 's/world \"Dedicated\"/'"world \"${WORLD}\""'/g' "start_server.sh"
 
-cd "${STEAMAPPDIR}" && bash "${STEAMAPPDIR}/start_server.sh"
+echo "Starting server..."
+
+bash "${STEAMAPPDIR}/start_server.sh"
