@@ -9,6 +9,10 @@ ENV STEAMAPPID 896660
 ENV STEAMAPP valheim
 ENV STEAMAPPDIR "${HOMEDIR}/${STEAMAPP}-dedicated"
 ENV DLURL https://raw.githubusercontent.com/johnposten/steamcmd-valheim
+ENV PORTRANGE "2456-2458/udp"
+ENV SERVER_NAME "Valheim Dedicated"
+ENV WORLD "something"
+ENV SERVER_PASSWORD "changeme"
 
 RUN set -x \
 	&& apt-get update \
@@ -20,9 +24,6 @@ RUN set -x \
 	&& chown "${USER}:${USER}" "${HOMEDIR}/entrypoint.sh" "${STEAMAPPDIR}" \
 	&& rm -rf /var/lib/apt/lists/*
 
-ENV PORTRANGE=2456-2458
-ENV SERVER_NAME "Valheim Dedicated"
-
 USER ${USER}
 
 WORKDIR ${HOMEDIR}
@@ -30,4 +31,4 @@ WORKDIR ${HOMEDIR}
 CMD ["bash", "entrypoint.sh"]
 
 # Expose ports
-EXPOSE 2456-2458/udp
+EXPOSE ${PORTRANGE}
